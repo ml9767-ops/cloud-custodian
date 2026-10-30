@@ -17,16 +17,20 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Set up Go
-        uses: actions/setup-go@v6
+      - name: Set up Python
+        uses: actions/setup-python@v6
         with:
-          go-version-file: go.mod
-          cache: false
+          python-version: '3.12'
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: false
 
       - name: Build under SBOMit
         uses: Uk-jake/sbomit-pipeline-runner@main
         with:
           build-command: |
-            make build
+            uv build --wheel
           sbom-format: spdx23
           use-syft: true
