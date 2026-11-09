@@ -26,5 +26,9 @@ jobs:
         with:
           enable-cache: false
 
-      - name: Build Wheels
-        run : make pkg-build-wheel
+      - name: Build Wheels under SBOMit
+        uses: Uk-jake/sbomit-pipeline-runner@main
+        with:
+          build-command: make pkg-build-wheel
+          sbom-format: spdx23
+          use-syft: true
