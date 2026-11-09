@@ -1,4 +1,4 @@
-name: SBOMit Test
+name: Build Time Test
 
 on:
   workflow_dispatch:
@@ -26,10 +26,5 @@ jobs:
         with:
           enable-cache: false
 
-      - name: Build under SBOMit
-        uses: Uk-jake/sbomit-pipeline-runner@main
-        with:
-          build-command: |
-            uv build --wheel
-          sbom-format: spdx23
-          use-syft: true
+      - name: Build Wheels
+        run : make pkg-build-wheel
